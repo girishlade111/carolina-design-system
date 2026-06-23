@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <>
       <SiteHeader />
-      <main className="flex-1">
+      <main id="main-content" className="flex-1 scroll-mt-16">
         <Hero />
 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

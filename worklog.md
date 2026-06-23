@@ -44,3 +44,24 @@ Work Log:
 
 Stage Summary:
 - Site is browser-verified interactive and runnable. Carolina design-system documentation site complete and faithful to spec.
+
+---
+Task ID: 2
+Agent: main (Z.ai Code)
+Task: Improve the navbar.
+
+Work Log:
+- Built `command-palette.tsx` using existing cmdk `CommandDialog`: lists all 8 sections + 5 component sub-entries + actions; fuzzy search filters; selecting an item smooth-scrolls to the target and updates the hash.
+- Rebuilt `site-header.tsx` with:
+  - Reading-progress bar (Framer Motion useScroll + useSpring, accent, origin-left scaleX) at the very top of the header.
+  - Scroll-aware styling: transparent border + light blur at top; border-border + bg/85 + backdrop-blur-xl once scrolled past 8px.
+  - Animated active pill via Framer Motion `layoutId="nav-active-pill"` — slides smoothly between active nav items; active item shows accent index number.
+  - Command palette trigger button with Search icon + ⌘K kbd hint; global keydown listener opens palette on Cmd/Ctrl+K.
+  - Skip-to-content link (sr-only, focus-visible revealed) targeting #main-content.
+  - Animated mobile menu via AnimatePresence (height+opacity); mobile items use bordered card style with accent active state; includes a "Search the docs ⌘K" button that opens the palette and closes the menu.
+  - Match-media listener auto-closes mobile menu on widening past lg.
+- Added `id="main-content"` + scroll-mt-16 to `<main>` in page.tsx for the skip link.
+- Lint clean. Agent Browser verified: Cmd+K opens palette; search filters ("button" → Buttons only); Enter navigates to #components-buttons with heading visible; active pill moves to current section on scroll; scrolled header border/blur applied; mobile hamburger opens animated menu; mobile "Search the docs" opens palette + closes menu; skip link present with sr-only classes. No runtime/console errors.
+
+Stage Summary:
+- Navbar upgraded from a static bar to a scroll-aware, command-palette-equipped docs header with reading progress, animated active indicator, and accessible skip link.
