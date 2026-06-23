@@ -65,3 +65,29 @@ Work Log:
 
 Stage Summary:
 - Navbar upgraded from a static bar to a scroll-aware, command-palette-equipped docs header with reading progress, animated active indicator, and accessible skip link.
+
+---
+Task ID: 3
+Agent: main (Z.ai Code)
+Task: Redesign navbar — put all menus into a single dropdown (navbar looked too crowded).
+
+Work Log:
+- Removed the inline 8-item primary nav AND the separate animated mobile menu.
+- Replaced with a single Radix `DropdownMenu` ("Open navigation menu") that holds ALL navigation:
+  - Group "Sections": all 8 sections with icon + index + label, active item highlighted with accent bg + check mark.
+  - Group "Components": Buttons, Inputs, Links, Lists, Navigation.
+  - Group "Actions": Accessibility criteria, Open reference site (external link).
+- Trigger button shows the current active section (icon + index + label + chevron that rotates on open), so it doubles as a "you are here" indicator. Updates live as the user scrolls (uses useActiveSection).
+- Dropdown is the primary nav on ALL breakpoints (Radix is touch-friendly), so desktop and mobile share one clean control.
+- Kept: reading-progress bar, scroll-aware border/blur, skip-to-content link, ⌘K command palette trigger, Reference link.
+- Fixed nav-scroll race: initial scrollIntoView was being overridden by Radix's post-close focus restoration scrolling back to the trigger. Rewrote `goTo` to defer 220ms then `window.scrollTo` to the element's offsetTop minus 72px header height, and move focus to the target for SR users.
+- Lint clean. Agent Browser verified on desktop (1440) + mobile (390):
+  - Dropdown opens with all 15 items grouped into Sections/Components/Actions.
+  - Selecting "Inputs" scrolls to #components-inputs (heading lands at top=72, below sticky header); trigger label updates to active section.
+  - Selecting "QA checklist" scrolls to #qa (top=88); trigger shows "07 QA checklist".
+  - Mobile dropdown opens with full item list.
+  - Visual review of 4 screenshots: clean, well-spaced, no cramping or overlap on either breakpoint.
+  - No runtime/console errors.
+
+Stage Summary:
+- Navbar is now a single clean dropdown containing every menu, replacing the crowded inline nav. Works identically on desktop and mobile; navigation scrolls correctly with a proper header offset.
