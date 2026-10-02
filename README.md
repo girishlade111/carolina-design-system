@@ -284,3 +284,7 @@ Helper scripts live in `.zscripts/`:
 ## License
 
 MIT — free to use, modify, and distribute.
+
+---
+
+Built by [Girish Lade](https://github.com/girishlade111) · Part of the [LadeStack](https://ladestack.in) open-source collection.
